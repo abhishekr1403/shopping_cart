@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../config/connection')
-var productHelpers= require('../helpers/product-helpers')
+var productHelpers = require('../helpers/product-helpers')
 
 
 var Handlebars = require('handlebars');
@@ -13,42 +13,42 @@ Handlebars.registerHelper("inc", function (value, options) {
 /* GET users listing. */
 router.get('/', function (req, res, next) {
 
-  productHelpers.getAllProducts().then((products)=>{
+  productHelpers.getAllProducts().then((products) => {
     //console.log(products)
     res.render('admin/view-products', { admin: true, products });
 
   })
 
-  
+
 });
 
 router.get('/add-product', function (req, res) {
-  
+
   res.render('admin/add-product')
 })
 
 
-router.post('/add-product',(req,res)=>{
+router.post('/add-product', (req, res) => {
 
   console.log(req.body)
   console.log(req.files.Image)
 
-  
-  productHelpers.addProduct(req.body,(id)=>{
 
-   let image=req.files.Image
-   image.mv('./public/product-images/'+id+'.jpg',(err,done)=>{
+  productHelpers.addProduct(req.body, (id) => {
 
-    if(err){
-      console.log(err)
+    let image = req.files.Image
+    image.mv('./public/product-images/' + id + '.jpg', (err, done) => {
 
-    }else{
-      res.render('admin/add-product')
-    }
-   })
-    
+      if (err) {
+        console.log(err)
+
+      } else {
+        res.render('admin/add-product')
+      }
+    })
+
 
   })
-  
+
 })
 module.exports = router;
