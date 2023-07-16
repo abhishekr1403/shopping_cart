@@ -72,7 +72,8 @@ router.get('/edit-product/:id', (req,res)=>{
 
 router.post('/edit-product/:id',(req,res)=>{
   let id = req.params.id
-  productHelpers.updateProduct(req.params.id,req.body).then(()=>{
+  console.log(id)
+  productHelpers.updateProduct(id,req.body).then(()=>{
     res.redirect('/admin')
   })
 

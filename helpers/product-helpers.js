@@ -6,7 +6,7 @@ const objectId = require('mongodb').ObjectID
 module.exports={
 
     addProduct: (product,callback)=>{
-        console.log(product)
+        //console.log(product)
 
         db.get().collection('Product').insertOne(product).then((data)=>{
 
